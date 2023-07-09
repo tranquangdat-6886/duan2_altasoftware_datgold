@@ -1,3 +1,10 @@
+/* Danh sách css
+1.1 css phần menu
+1.2 css phần quả cầu rơi
+1.3 css cho phần icon2 hình nhiều người của home
+1.4 css khung chứa nội dung nhập dữ liệu trang home
+1.5 css trang sự kiện nối bật
+1.6 css phần thanh toán thành công */
 /* 1.1 css phần menu */
 @font-face {
   font-family: 'iCiel Koni';
@@ -331,7 +338,7 @@ box-shadow: -1px 3px 3px 0px rgba(178, 91, 11, 0.50) inset;
   margin-top: -9px;
   
 }
-/* 1.4 css trang sự kiện nối bật */
+/* 1.5 css trang sự kiện nối bật */
 
 
 .sukiennoibat{
@@ -687,7 +694,7 @@ flex-shrink: 0;
   flex-shrink: 0;
 }
 
-/* css phần thanh toán thành công */
+/* 1.6 css phần thanh toán thành công */
 .thanhcong_title{
   display: flex;
 width: 210px;
