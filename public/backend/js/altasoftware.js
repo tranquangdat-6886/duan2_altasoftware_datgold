@@ -310,9 +310,6 @@ function toggleSidebar() {
     });
   });
   
-
-
-    
-
+//CKeditor 5
 
 

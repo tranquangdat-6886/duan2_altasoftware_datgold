@@ -68,7 +68,7 @@
                             <img src="{{ asset('frontend/assets/images/vecuaban.png') }}" alt="" class="img-fluid">
                         </div>
                         <div class="position-absolute translate-middle absolute-text5">
-                            <form action="/pay">
+                            <form action="">
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="position-relative">
