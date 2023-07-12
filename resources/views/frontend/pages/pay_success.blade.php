@@ -26,87 +26,20 @@
                     <div class="col-lg-10 ">
                         <div class="row ">
                             <div class="col-lg-3 sukien_khung">
-                                <div class="card ">
+                                <div class="card">
                                     <div class="card-header p-0 bg-transparent border-0 text-center pt-3">
-                                        <img src="{{ asset('frontend/assets/images/maqr.png') }}" class="img-fluid"
-                                            alt="">
+                                        {!! $qrCode['qrCodeSvg'] !!}
                                     </div>
                                     <div class="card-body">
-                                        <h1 class="mb-3 thanhcong_title">ALT20210501</h1>
+                                        <h1 class="mb-3 thanhcong_title">{{ $qrCode['name'] }}</h1>
                                         <div class="text-center ps-5">
-                                            <p class=" thanhcong_title2 mb-0">VÉ CỔNG</p>
+                                            <p class="thanhcong_title2 mb-0">VÉ CỔNG</p>
                                             <p class="mt-0 gach ms-5">---</p>
-                                            <p class="thanhcong_date">Ngày sử dụng: 31/05/2021</p>
+                                            <p class="thanhcong_date">Ngày sử dụng: {{ $qrCode['ticketDate'] }}</p>
                                             <p> <img src="{{ asset('frontend/assets/images/tick_thanhcong.png') }}"
                                                     class="img-fluid tick_thanhcong" alt=""></p>
                                         </div>
-
-
                                     </div>
-
-                                </div>
-                            </div>
-                            <div class="col-lg-3 sukien_khung">
-                                <div class="card ">
-                                    <div class="card-header p-0 bg-transparent border-0 text-center pt-3">
-                                        <img src="{{ asset('frontend/assets/images/maqr.png') }}" class="img-fluid"
-                                            alt="">
-                                    </div>
-                                    <div class="card-body">
-                                        <h1 class="mb-3 thanhcong_title">ALT20210501</h1>
-                                        <div class="text-center ps-5">
-                                            <p class=" thanhcong_title2 mb-0">VÉ CỔNG</p>
-                                            <p class="mt-0 gach ms-5">---</p>
-                                            <p class="thanhcong_date">Ngày sử dụng: 31/05/2021</p>
-                                            <p> <img src="{{ asset('frontend/assets/images/tick_thanhcong.png') }}"
-                                                    class="img-fluid tick_thanhcong" alt=""></p>
-                                        </div>
-
-
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="col-lg-3 sukien_khung">
-                                <div class="card ">
-                                    <div class="card-header p-0 bg-transparent border-0 text-center pt-3">
-                                        <img src="{{ asset('frontend/assets/images/maqr.png') }}" class="img-fluid"
-                                            alt="">
-                                    </div>
-                                    <div class="card-body">
-                                        <h1 class="mb-3 thanhcong_title">ALT20210501</h1>
-                                        <div class="text-center ps-5">
-                                            <p class=" thanhcong_title2 mb-0">VÉ CỔNG</p>
-                                            <p class="mt-0 gach ms-5">---</p>
-                                            <p class="thanhcong_date">Ngày sử dụng: 31/05/2021</p>
-                                            <p> <img src="{{ asset('frontend/assets/images/tick_thanhcong.png') }}"
-                                                    class="img-fluid tick_thanhcong" alt=""></p>
-                                        </div>
-
-
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="col-lg-3 sukien_khung">
-                                <div class="card ">
-                                    <div class="card-header p-0 bg-transparent border-0 text-center pt-3">
-                                        <img src="{{ asset('frontend/assets/images/maqr.png') }}" class="img-fluid"
-                                            alt="">
-                                    </div>
-                                    <div class="card-body">
-                                        <h1 class="mb-3 thanhcong_title">ALT20210501</h1>
-                                        <div class="text-center ps-5">
-                                            <p class=" thanhcong_title2 mb-0">VÉ CỔNG</p>
-                                            <p class="mt-0 gach ms-5">---</p>
-                                            <p class="thanhcong_date">Ngày sử dụng: 31/05/2021</p>
-                                            <p> <img src="{{ asset('frontend/assets/images/tick_thanhcong.png') }}"
-                                                    class="img-fluid tick_thanhcong" alt=""></p>
-                                        </div>
-
-
-                                    </div>
-
                                 </div>
                             </div>
                         </div>
@@ -133,8 +66,8 @@
                     <div class="row justify-content-center">
                         <div class="col-lg-6 text-center p-0">
                             <a href="">
-                                <img src="{{ asset('frontend/assets/images/taive.png') }}" class="img-fluid"
-                                    alt="" style="width: 160px; height: 40px;">
+                                <img src="{{ asset('frontend/assets/images/taive.png') }}" class="img-fluid" alt=""
+                                    style="width: 160px; height: 40px;">
                             </a>
                         </div>
                         <div class="col-lg-6 text-center p-0">

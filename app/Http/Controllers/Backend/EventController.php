@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\Event;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class EventController extends Controller
 {
@@ -27,7 +28,7 @@ class EventController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.pages.events.add_events');
     }
 
     /**
@@ -38,8 +39,53 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required',
+            'startDate' => 'required|date',
+            'status' => 'required|int:0,1',
+            'endDate' => 'required|date',
+            'avatar' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ], [
+            'startDate.required' => 'Vui lòng chọn ngày bắt đầu diễn ra sự kiện',
+            'endDate.required' => 'Vui lòng chọn ngày kết thúc sự kiện',
+            'name.required' => 'Không được bỏ trống tên sự kiện',
+            'avatar.required' => 'Vui lòng chọn avatar sự kiện',
+            'description.required' => 'Vui lòng nhập mô tả',
+            'status.required' => 'Vui lòng chọn trạng thái',
+        ]);
+
+        $event = new Event();
+        $event->name = $request->input('name');
+        $event->startDate = $request->input('startDate');
+        $event->endDate = $request->input('endDate');
+        $event->title = $request->input('title');
+        $event->status = $request->input('status');
+
+        if ($request->hasFile('avatar')) {
+            $image = $request->file('avatar');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('images'), $imageName);
+            $imagePath = 'images/' . $imageName;
+            $event->avatar = $imagePath;
+        }
+
+        $content = $request->input('description');
+        $event->description = $content;
+
+        $event->save();
+
+        // Xử lý các tệp tin đính kèm (nếu có)
+        if ($request->hasFile('upload')) {
+            $file = $request->file('upload');
+            // Lưu trữ tệp tin và lấy URL
+            $path = $file->store('uploads');
+            $url = Storage::url($path);
+        }
+
+        return redirect()->route('events.index');
     }
+
 
     /**
      * Display the specified resource.
@@ -61,6 +107,7 @@ class EventController extends Controller
     public function edit($id)
     {
         //
+
     }
 
     /**

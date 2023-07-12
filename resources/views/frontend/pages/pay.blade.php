@@ -10,9 +10,11 @@
             </div>
         </div>
         <div class="container">
-            <form action="{{ route('order.create') }}" method="POST">
+            <form action="{{ route('order.checkout') }}" method="POST">
                 @csrf
                 <!-- Thêm csrf token -->
+                <input type="hidden" value="{{$order['ID_TICKET']}}" name="ID_TICKET">
+                <input type="hidden" value="{{$order['ID_CU']}}" name="ID_CU">
                 <div class="row">
                     <div class="col-lg-12 position-relative">
                         <img src="{{ asset('frontend/assets/images/nenthanhtoan.png') }}" class="img-fluid" alt="">
@@ -24,33 +26,39 @@
                             <div class="row">
                                 <div class="col-lg-5">
                                     <label for="" class="label_thanhtoan">Số tiền thanh toán</label>
-                                    <input type="text" name="price" class="form-control thanhtoan_price">
+                                    <input type="text" name="price" class="form-control thanhtoan_price"
+                                        value="{{ number_format($detailOrder['price'], 0, ',', '.') }}">
                                 </div>
                                 <div class="col-lg-2">
                                     <label for="" class="label_thanhtoan">Số lượng vé</label>
-                                    <input type="text" name="quantity" class="form-control thanhtoan_quantiti">
+                                    <input type="text" name="quantity" class="form-control thanhtoan_quantiti"
+                                        value="{{ $order['quantity'] }}" >
                                 </div>
                                 <div class="col-lg-5">
                                     <label for="" class="label_thanhtoan">Ngày sử dụng</label>
-                                    <input type="text" name="ticketDate" class="form-control thanhtoan_date">
+                                    <input type="text" name="ticketDate" class="form-control thanhtoan_date"
+                                        value="{{ $customer['ticketDate'] }}" disabled>
                                 </div>
                             </div>
                             <div class="row mt-2">
                                 <div class="col-lg-7">
                                     <label for="" class="label_thanhtoan">Thông tin liên hệ</label>
-                                    <input type="text" name="name" class="form-control thanhtoan_contact">
+                                    <input type="text" name="name" class="form-control thanhtoan_contact"
+                                        value="{{ $customer['name'] }}" disabled>
                                 </div>
                             </div>
                             <div class="row mt-2">
                                 <div class="col-lg-5">
                                     <label for="" class="label_thanhtoan">Điện thoại</label>
-                                    <input type="text" name="phoneNumber" class="form-control thanhtoan_contact">
+                                    <input type="text" name="phoneNumber" class="form-control thanhtoan_contact"
+                                        value="{{ $customer['phoneNumber'] }}" disabled>
                                 </div>
                             </div>
                             <div class="row mt-2">
                                 <div class="col-lg-7">
                                     <label for="" class="label_thanhtoan">Email</label>
-                                    <input type="text" name="email" class="form-control thanhtoan_contact">
+                                    <input type="text" name="email" class="form-control thanhtoan_contact"
+                                        value="{{ $customer['email'] }}" disabled>
                                 </div>
                             </div>
                         </div>

@@ -791,3 +791,50 @@ line-height: 30px;
   left: 1780px;
   bottom: 10px;
 }
+
+/* css cho phần chọn ngày */
+ /* Ghi đè lên CSS mặc định của flatpickr */
+ .flatpickr-day.selected {
+  background-color: #ff7506 !important;
+  color: #fff !important;
+}
+/* Đổi màu cho các ngày trong tuần */
+/* .flatpickr-day:not(.prevMonthDay):not(.nextMonthDay) {
+color: #ff7506 !important;
+} */
+
+/* Đổi màu cho các thứ trong tuần */
+.flatpickr-weekdaycontainer .flatpickr-weekday {
+color: #ff7506 !important;
+}
+#datepickerWrapper {
+width: 100% !important;
+}
+
+#myDate {
+width: 100% !important;
+}
+/* .flatpickr-calendar{
+width: 400px!important;
+text-align: center !important;
+} */
+
+/* css cho icon ngày tháng nằm trong khung input trong menu services */
+.input-with-icon {
+position: relative;
+}
+
+.input-icon {
+position: absolute;
+top: 50%;
+transform: translateY(-50%);
+left: 10px;
+pointer-events: none;
+color: #ff7506;
+}
+.error{
+  list-style-type: none;
+  font-family: iCiel Koni;
+  font-size: 8px;
+  color: #ca440a;
+}

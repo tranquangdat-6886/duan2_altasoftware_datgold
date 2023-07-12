@@ -11,7 +11,7 @@ class VnpayController extends Controller
     //
     public function index()
     {
-        return view('frontend.pages.pay');
+     
     }
 
 

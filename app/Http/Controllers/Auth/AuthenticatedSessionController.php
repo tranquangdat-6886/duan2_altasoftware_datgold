@@ -49,6 +49,7 @@ class AuthenticatedSessionController extends Controller
             'errorlogin' => __('Sai mật khẩu hoặc tên đăng nhập!'),
         ]);
     }
+
     /**
      * Destroy an authenticated session.
      */

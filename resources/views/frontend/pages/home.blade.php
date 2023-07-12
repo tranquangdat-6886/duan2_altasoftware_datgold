@@ -68,37 +68,52 @@
                             <img src="{{ asset('frontend/assets/images/vecuaban.png') }}" alt="" class="img-fluid">
                         </div>
                         <div class="position-absolute translate-middle absolute-text5">
-                            <form action="">
+                            <form action="{{ route('order.create') }}" method="POST">
+                                @csrf
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="position-relative">
                                             <select class="form-select mb-3 chongoi" aria-label=".form-select-lg example"
                                                 id="mySelect" name="package">
                                                 <option selected>Chọn gói</option>
-                                                <option value="1">Gói gia đình</option>
+                                                @foreach ($package as $package)
+                                                    <option value="{{ $package->ID_PACK }}">{{ $package->name }}</option>
+                                                @endforeach
                                             </select>
                                             <img src="{{ asset('frontend/assets/images/nutselect.png') }}" alt=""
                                                 class="img-fluid select-image" id="selectButton">
                                         </div>
-                                    </div>
 
+                                    </div>
+               
                                 </div>
                                 <div class="row hanghaichonngay">
                                     <div class="col-lg-3">
                                         <div class="position-relative">
-                                            <input type="text" class=" form-control soluongve" name="quantiti"
+                                            <input type="text" class=" form-control soluongve" name="quantity"
                                                 id="" placeholder="Số lượng vé">
 
                                         </div>
+                
                                     </div>
                                     <div class="col-lg-9">
                                         <div class="position-relative">
-                                            <input type="text" class=" form-control ngaysudung" name="ticketDate"
-                                                id="" placeholder="Ngày sử dụng">
+                                            <input type="text" class="form-control form-control_cam ngaysudung"
+                                                id="ticketDate" name="ticketDate" placeholder="Ngày sử dụng">
                                             <img src="{{ asset('frontend/assets/images/chonngay.png') }}" alt=""
                                                 class="img-fluid select-image" id="chonngay">
                                         </div>
+
+                                        <script>
+                                            // Khi nhấp vào hình ảnh 'chonngay'
+                                            document.getElementById('chonngay').addEventListener('click', function() {
+                                                // Hiển thị ô ngày
+                                                flatpickr('#ticketDate');
+                                            });
+                                        </script>
+               
                                     </div>
+                                
                                 </div>
                                 <div class="row mt-2">
                                     <div class="col-lg-12">
@@ -107,6 +122,7 @@
                                                 id="" placeholder="Họ và tên">
                                         </div>
                                     </div>
+                    
                                 </div>
                                 <div class="row mt-2">
                                     <div class="col-lg-12">
@@ -127,10 +143,10 @@
                                 <div class="row mt-1">
                                     <div class="col-lg-12">
                                         <div class="position-relative">
-                                           <button type="submit" class="btn bg-transparent border-0">
-                                            <img src="{{ asset('frontend/assets/images/datve.png') }}" alt=""
-                                            class="img-fluid datve" id="datve">
-                                           </button>
+                                            <button type="submit" class="btn bg-transparent border-0">
+                                                <img src="{{ asset('frontend/assets/images/datve.png') }}" alt=""
+                                                    class="img-fluid datve" id="datve">
+                                            </button>
                                         </div>
                                     </div>
                                 </div>

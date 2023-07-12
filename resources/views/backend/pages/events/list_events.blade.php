@@ -7,7 +7,7 @@
                 <h1 class="title_pages">List Events</h1>
             </div>
             <div class="col-lg-6 text-end">
-                <a href="{{route('events.create')}}" class="btn btn-success button_pages">
+                <a href="{{ route('events.create') }}" class="btn btn-success button_pages">
                     <i class="fa-solid fa-plus"></i> Thêm mới
                 </a>
             </div>
@@ -44,8 +44,8 @@
                                     <td>
                                         {{ $event->name }}
                                     </td>
-                                    <td>datgol</td>
-                                    <td>olake</td>
+                                    <td> {{ date('d-m-Y', strtotime($event->startDate)) }}</td>
+                                    <td> {{ date('d-m-Y', strtotime($event->endDate)) }}</td>
                                 </tr>
                             @endforeach
                         @else

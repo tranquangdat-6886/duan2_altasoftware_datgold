@@ -18,7 +18,8 @@ return new class extends Migration
             $table->unsignedBigInteger("ID_EVEN")->nullable();
             $table->unsignedBigInteger("ID_PACK")->nullable();
             $table->string('name');
-            $table->decimal("price");
+            $table->decimal("price", 10, 2)->default(0);
+            $table->integer("quantity");
             $table->dateTime("saleDate");
             $table->integer("status");
             $table->foreign('ID_EVEN')->references('ID_EVEN')->on('events')->onDelete('SET NULL');

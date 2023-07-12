@@ -23,16 +23,22 @@
                                 <a href="" class="nav-link ">Dashboard</a>
                             </li>
                             <li class="nav-item font_19 ">
-                                <a href="" class="nav-link ">Packages</a>
+                                <a href="{{ route('package.index') }}" class="nav-link ">Packages</a>
                             </li>
                             <li class="nav-item font_19 ">
-                                <a href="{{route("events.index")}}" class="nav-link ">Events</a>
+                                <a href="{{ route('events.index') }}" class="nav-link ">Events</a>
                             </li>
                             <li class="nav-item font_19 ">
-                                <a href="" class="nav-link ">Tickets</a>
+                                <a href="{{ route('ticket.index') }}" class="nav-link ">Tickets</a>
                             </li>
                             <li class="nav-item font_19 ">
-                                <a href="" class="nav-link ">Orders</a>
+                                <a href="{{route('order')}}" class="nav-link ">Orders</a>
+                            </li>
+                            <li class="nav-item font_19 ">
+                                <a href="" class="nav-link ">Contacts</a>
+                            </li>
+                            <li class="nav-item font_19 ">
+                                <a href="" class="nav-link ">Settings</a>
                             </li>
                         </ul>
                         {{-- <x-responsive-nav-link :href=""

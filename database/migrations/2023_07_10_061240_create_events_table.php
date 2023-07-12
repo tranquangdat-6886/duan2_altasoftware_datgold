@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string("title");
             $table->string("avatar")->nullable();
             $table->string('images')->nullable();
-            $table->string('description')->nullable();
+            $table->text('description')->nullable();
             $table->date('startDate');
             $table->date('endDate');
             $table->integer('status');

@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('detail_orders', function (Blueprint $table) {
             $table->id("ID_DETAIL");
             $table->unsignedBigInteger("ID_ORDER")->nullable();
-            $table->decimal("price"); 
+            $table->decimal("price", 10, 2)->default(0);
             $table->foreign("ID_ORDER")->references("ID_ORDER")->on("orders")->onDelete("SET NULL");          
             // $table->timestamps();
         });
