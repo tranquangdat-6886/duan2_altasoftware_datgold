@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id("ID_PAY");
-            $table->string('vnp_Amount')->nullable();
+            $table->decimal("vnp_Amount", 10, 2)->default(0);
             $table->string('vnp_BankCode')->nullable();
             $table->string('vnp_BankTranNo')->nullable();
             $table->string('vnp_CardType')->nullable();

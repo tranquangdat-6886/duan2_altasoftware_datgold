@@ -9,8 +9,6 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 
-
-
 //frontend Little & Little
 Route::group(['namespace' => 'App\Http\Controllers\Frontend'], function () {
     // Các route cho phần frontend
@@ -18,7 +16,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Frontend'], function () {
     Route::get('/pay', 'OrderController@pay');
     Route::get('/paysuccess', 'OrderController@paysuccess')->name('paysuccess');
     Route::get('/event', 'EventController@index');
-    Route::get('/detail', 'EventController@detail');
+    Route::get('/detail/{ID_EVEN}', 'EventController@detail')->name('eventdetail');
     Route::get('/contact', 'ContactController@index');
     Route::post('/orders', 'OrderController@create')->name('order.create');
     Route::post('/checkout', 'OrderController@checkout')->name('order.checkout');
@@ -29,9 +27,8 @@ Route::group(['namespace' => 'App\Http\Controllers\Frontend'], function () {
 });
 
 //backend Little & Little
-Route::get('/dashboard', function () {
-    return view('backend.dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', 'App\Http\Controllers\Backend\HomeController@index')
+->middleware(['auth', 'verified'])->name('dashboard');
 Route::middleware('auth')->group(function () {
     Route::resource('events', EventController::class);
     Route::resource('package', PackageController::class);

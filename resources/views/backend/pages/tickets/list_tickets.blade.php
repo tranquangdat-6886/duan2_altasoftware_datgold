@@ -22,7 +22,7 @@
                                 NO.
                             </th>
                             <th>
-                                Event Name
+                                Ticket Name
                             </th>
                             <th>
                                 Sale Date

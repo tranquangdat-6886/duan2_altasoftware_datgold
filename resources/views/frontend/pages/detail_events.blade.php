@@ -9,7 +9,7 @@
                     <img src="{{ asset('frontend/assets/images/cophai.png') }}" alt="" class="img-fluid cotrai">
                 </div>
                 <div class="col-lg-6 text-center " style="z-index: 10;">
-                    <h1 class="sukiennoibat">Sự Kiện 1</h1>
+                    <h1 class="sukiennoibat">{{ $event->name }}</h1>
                 </div>
                 <div class="col-lg-3 text-end " style="z-index: 10;">
                     <img src="{{ asset('frontend/assets/images/cotrai.png') }}" alt="" class="img-fluid cophai">
@@ -27,49 +27,41 @@
                         <div class="row">
                             <div class="card p-0 bg-transparent border-0">
                                 <div class="card-header bg-transparent border-0 p-0">
-                                    <img src="{{ asset('frontend/assets/images/detail_01.png') }}" alt=""
-                                        class="img-fluid anhdetail1">
+                                    <img src="{{ asset($event->avatar) }}" alt="" class="img-fluid anhdetail1">
                                 </div>
                                 <div class="card-body p-0 bg-transparent  border-0 pt-3 ps-0">
                                     <p class="ngaydetail"><span><img
                                                 src="{{ asset('frontend/assets/images/calendar.png') }}" alt=""
-                                                class="img-fluid"></span>30/05/2023 - 17/07/2023</p>
+                                                class="img-fluid"></span>{{ date('d/m/Y', strtotime($event->startDate)) }}
+                                        - {{ date('d/m/Y', strtotime($event->endDate)) }}</p>
                                     <p class="title_card_col-1">
                                         Đầm sen Park
                                     </p>
-                                    <p class="gia_detail ">25.000 VND</p>
+                                    @if (isset($ticket->price))
+                                        <p class="gia_detail ">{{ number_format($ticket->price, 0, ',', '.') }} VND</p>
+                                    @endif
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="position-absolute translate-middle detail_absolute1">
 
-                        <div class=" ">
-                            <p id="khoi_textdetail1">
-                                <span class="text_detail1">
-                                    Lorem Ipsum
-                                </span> chỉ đơn giản là văn bản giả của ngành công nghiệp in ấn và sắp chữ. Lorem
-                                Ipsum là văn bản giả tiêu chuẩn của ngành từ những năm 1500, khi một nhà in không xác
-                                định lấy một bộ sưu tập các loại và xáo trộn nó để tạo thành một cuốn sách mẫu. Nó đã
-                                tồn tại không chỉ năm thế kỷ mà còn là bước nhảy vọt sang sắp chữ sdsd điện tử, cssa về
-                                cơ bản không thay đổi. Nó được phổ biến vào những năm 1960 với việc phát hành các tờ
-                                Letraset chứa các đoạn Lorem Ipsum của Lorem Ipsum.
-                            </p>
-                        </div>
+                        <p id="khoi_textdetail1">
+                            {!! strip_tags(str_replace('&nbsp;', ' ', trim($event->description1)), '<img>') !!}
+                        </p>
                     </div>
                     <div class="position-absolute translate-middle detail_absolute2">
                         <div class=" ms-5">
                             <div class="card p-0 bg-transparent border-0 khoi_textdetail2">
                                 <div class="card-header bg-transparent border-0 p-0">
-                                    <img src="{{ asset('frontend/assets/images/detail_02.png') }}" alt=""
-                                        class="img-fluid anhdetail2">
+
                                 </div>
                                 <div class="card-body p-0 bg-transparent  border-0 pt-3 ps-0">
                                     <p id="text_detail2">
-                                        Lorem Ipsum không đơn giản là văn bản ngẫu nhiên. Nó bắt nguồn từ một tác phẩm
-                                        văn học Latinh cổ điển từ năm 45 trước Công nguyên, tức là nó đã hơn 2000 năm
-                                        tuổi. các từ, consectetur, từ một đoạn văn Lorem Ipsum, và xem qua các trích dẫn
-                                        của từ này trong văn học cổ điển,
+
+                                        {!! strip_tags(str_replace('&nbsp;', ' ', trim($event->description2)), '<img>') !!}
+
+
                                     </p>
                                 </div>
                             </div>
@@ -80,14 +72,11 @@
                             <div class="card p-0 bg-transparent border-0 khoi_textdetail2">
 
                                 <div class="card-body p-0 bg-transparent  border-0 pt-3 ps-0">
-                                    <p id="text_detail2" class="mb-3">
-                                        Lorem Ipsum không đơn giản là văn bản ngẫu nhiên. Nó bắt nguồn từ một tác phẩm
-                                        văn học Latinh cổ điển từ năm 45 trước Công nguyên, tức là nó đã hơn 2000 năm
-                                        tuổi. các từ, consectetur, từ một đoạn văn Lorem Ipsum, và xem qua các trích dẫn
-                                        của từ này trong văn học cổ điển,
+
+                                    <p id="text_detail3" class="mb-3">
+                                        {!! strip_tags(str_replace('&nbsp;', ' ', trim($event->description3)), '<img>') !!}
                                     </p>
-                                    <img src="{{ asset('frontend/assets/images/detail_02.png') }}" alt=""
-                                        class="img-fluid anhdetail2">
+
                                 </div>
 
 

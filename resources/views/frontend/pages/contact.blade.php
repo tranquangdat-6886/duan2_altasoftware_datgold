@@ -1,5 +1,5 @@
 @extends('frontend.layouts.apps')
-@section('title', 'Sự kiện')
+@section('title', 'Liên hệ')
 @section('main-content')
     <section class="pt-5 khung">
         <div class="container-fluid" style="z-index: 10;">

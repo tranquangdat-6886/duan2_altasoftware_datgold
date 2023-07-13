@@ -13,8 +13,8 @@
             <form action="{{ route('order.checkout') }}" method="POST">
                 @csrf
                 <!-- Thêm csrf token -->
-                <input type="hidden" value="{{$order['ID_TICKET']}}" name="ID_TICKET">
-                <input type="hidden" value="{{$order['ID_CU']}}" name="ID_CU">
+                <input type="hidden" value="{{ $order['ID_TICKET'] }}" name="ID_TICKET">
+                <input type="hidden" value="{{ $order['ID_CU'] }}" name="ID_CU">
                 <div class="row">
                     <div class="col-lg-12 position-relative">
                         <img src="{{ asset('frontend/assets/images/nenthanhtoan.png') }}" class="img-fluid" alt="">
@@ -23,7 +23,7 @@
                                 alt="">
                         </div>
                         <div class="position-absolute translate-middle tieude_goi">
-                            <h1 id="goi_tieude">Vé cổng - </h1>
+                            <h1 id="goi_tieude">Vé cổng - {{ $tengoi }}</h1>
                         </div>
                         <div class="position-absolute translate-middle absolute_thanhtoan">
                             <div class="row">
@@ -35,7 +35,7 @@
                                 <div class="col-lg-2">
                                     <label for="" class="label_thanhtoan">Số lượng vé</label>
                                     <input type="text" name="quantity" class="form-control thanhtoan_quantiti"
-                                        value="{{ $order['quantity'] }}" >
+                                        value="{{ $order['quantity'] }}">
                                 </div>
                                 <div class="col-lg-5">
                                     <label for="" class="label_thanhtoan">Ngày sử dụng</label>

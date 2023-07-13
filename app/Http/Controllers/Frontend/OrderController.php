@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Customer;
 use App\Models\DetailOrder;
 use App\Models\Order;
+use App\Models\Package;
 use App\Models\Payment;
 use App\Models\Ticket;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
@@ -35,10 +36,13 @@ class OrderController extends Controller
         $package = $request->input('package');
         $ticket = Ticket::where('ID_PACK', $package)->first();
 
+        $goi = Package::where('ID_PACK', $package)->first();
+        $tengoi = $goi->name;
         $order = new Order();
         $order->ID_CU = $customer->ID_CU;
         $order->ID_TICKET = $ticket->ID_TICKET;
         $order->quantity = $request->input('quantity');
+        $order->status = 0;
         $order->save();
         $tongtien = ($ticket->price) * ($order->quantity);
         $detailOrder = new DetailOrder();
@@ -63,7 +67,7 @@ class OrderController extends Controller
                 'price' => $detailOrder->price,
             ],
 
-        ]);
+        ])->with('tengoi', $tengoi);
     }
     public function checkout(Request $request)
     {
@@ -76,12 +80,12 @@ class OrderController extends Controller
         $quantity = $request->input('quantity');
         $vnp_Returnurl = route('callback', ['ID_CU' => $customer, 'ID_TICKET' => $ticket, 'quantity' => $quantity]);
         $vnp_TxnRef = uniqid();
-        $vnp_OrderInfo = "Thanh toán Vé Đầm Sen Datgold"; 
-        $vnp_OrderType = "Vé little & LITTLE"; 
-        $vnp_Amount = $price * 100000; 
+        $vnp_OrderInfo = "Thanh toán Vé Đầm Sen Datgold";
+        $vnp_OrderType = "Vé little & LITTLE";
+        $vnp_Amount = $price * 100000;
         $vnp_Locale = "vn";
-        $vnp_BankCode = "NCB"; 
-        $vnp_IpAddr = $request->ip(); 
+        $vnp_BankCode = "NCB";
+        $vnp_IpAddr = $request->ip();
 
         $inputData = array(
             "vnp_Version" => "2.1.0",
@@ -132,7 +136,8 @@ class OrderController extends Controller
     public function callback(Request $request, $ID_CU, $ID_TICKET, $quantity)
     {
         $responseData = $request->all();
-        Payment::create($responseData);   
+        $payment = Payment::create($responseData);
+        $mave = $payment->vnp_BankTranNo;
         $customer = Customer::find($ID_CU);
         $customer->status = 1;
         $customer->save();
@@ -141,8 +146,9 @@ class OrderController extends Controller
         $ticket->quantity -= $quantity;
         $ticket->save();
 
-        $order = Order::where('ID_CU', $ID_CU)->get();
-
+        $order = Order::where('ID_CU', $ID_CU)->first();
+        $order->status = 1;
+        $order->save();
         $name = $customer->name;
         $ticketDate = $customer->ticketDate;
         $soluong = $order->sum('quantity');
@@ -168,6 +174,6 @@ class OrderController extends Controller
             ];
         }
 
-        return view('frontend.pages.pay_success', compact('qrCodes'));
+        return view('frontend.pages.pay_success', compact('qrCodes'))->with('mave', $mave);
     }
 }

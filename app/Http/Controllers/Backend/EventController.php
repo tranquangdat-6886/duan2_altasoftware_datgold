@@ -41,7 +41,9 @@ class EventController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'description' => 'required',
+            'description1' => 'required',
+            'description2' => 'required',
+            'description3' => 'required',
             'startDate' => 'required|date',
             'status' => 'required|int:0,1',
             'endDate' => 'required|date',
@@ -51,7 +53,9 @@ class EventController extends Controller
             'endDate.required' => 'Vui lòng chọn ngày kết thúc sự kiện',
             'name.required' => 'Không được bỏ trống tên sự kiện',
             'avatar.required' => 'Vui lòng chọn avatar sự kiện',
-            'description.required' => 'Vui lòng nhập mô tả',
+            'description1.required' => 'Vui lòng nhập mô tả',
+            'description2.required' => 'Vui lòng nhập mô tả',
+            'description3.required' => 'Vui lòng nhập mô tả',
             'status.required' => 'Vui lòng chọn trạng thái',
         ]);
 
@@ -70,8 +74,12 @@ class EventController extends Controller
             $event->avatar = $imagePath;
         }
 
-        $content = $request->input('description');
-        $event->description = $content;
+        $content1 = $request->input('description1');
+        $content2 = $request->input('description2');
+        $content3 = $request->input('description3');
+        $event->description1 = $content1;
+        $event->description2 = $content2;
+        $event->description3 = $content3;
 
         $event->save();
 

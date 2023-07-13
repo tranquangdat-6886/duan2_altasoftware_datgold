@@ -556,6 +556,20 @@ box-shadow: -1px 3px 3px 0px rgba(178, 91, 11, 0.50) inset;
   top: 350px;
   left: -23px;
 }
+.tieude_goi{
+  top: 40px;
+  left: 25px;
+}
+#goi_tieude{
+  color: var(--w, #FFF);
+
+/* Koni / 28  */
+font-family: iCiel Koni;
+font-size: 28px;
+font-style: normal;
+font-weight: 900;
+line-height: normal;
+}
 .tt_hinhnguoi1{
   width: 239px;
   height: 499px;
@@ -635,7 +649,7 @@ flex-shrink: 0;
   display: flex;
 width: 288px;
 flex-direction: column;
-justify-content: center;
+
 flex-shrink: 0;
 
 

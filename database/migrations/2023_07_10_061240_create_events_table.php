@@ -19,7 +19,9 @@ return new class extends Migration
             $table->string("title");
             $table->string("avatar")->nullable();
             $table->string('images')->nullable();
-            $table->text('description')->nullable();
+            $table->longText('description1')->nullable();
+            $table->longText('description2')->nullable();
+            $table->longText('description3')->nullable();
             $table->date('startDate');
             $table->date('endDate');
             $table->integer('status');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Event;
+use App\Models\Ticket;
 use Illuminate\Http\Request;
 
 class EventController extends Controller
@@ -15,8 +16,10 @@ class EventController extends Controller
         return view('frontend.pages.events')->with('events', $events);
     }
 
-    public function detail()
+    public function detail($ID_EVEN)
     {
-        return view('frontend.pages.detail_events');
+        $event = Event::find($ID_EVEN);
+        $ticket = Ticket::where('ID_EVEN', $ID_EVEN)->first();
+        return view('frontend.pages.detail_events')->with('event', $event)->with('ticket', $ticket);
     }
 }

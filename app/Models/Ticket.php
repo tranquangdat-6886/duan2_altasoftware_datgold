@@ -17,7 +17,7 @@ class Ticket extends Model
     }
     public function event()
     {
-        return $this->belongsTo(Package::class, 'ID_EVEN', 'ID_EVEN');
+        return $this->belongsTo(Event::class, 'ID_EVEN', 'ID_EVEN');
     }
     public function order()
     {

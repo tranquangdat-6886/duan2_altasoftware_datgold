@@ -1,5 +1,5 @@
 @extends('frontend.layouts.apps')
-@section('title', 'Sự kiện')
+@section('title', 'thanh toán thành công')
 @section('main-content')
     <section class="pt-5 khung">
         <div class="container-fluid" style="z-index: 10;">
@@ -33,11 +33,12 @@
                                             {!! $qrCode['qrCodeSvg'] !!}
                                         </div>
                                         <div class="card-body">
-                                            <h1 class="mb-3 thanhcong_title">{{ $qrCode['name'] }}</h1>
+                                            <h1 class="mb-3 thanhcong_title ms-3">{{ $mave }}</h1>
                                             <div class="text-center ps-5">
                                                 <p class="thanhcong_title2 mb-0">VÉ CỔNG</p>
                                                 <p class="mt-0 gach ms-5">---</p>
-                                                <p class="thanhcong_date">Ngày sử dụng: {{ $qrCode['ticketDate'] }}</p>
+                                                <p class="thanhcong_date">Ngày sử dụng:
+                                                    {{ date('d/m/Y', strtotime($qrCode['ticketDate'])) }}</p>
                                                 <p> <img src="{{ asset('frontend/assets/images/tick_thanhcong.png') }}"
                                                         class="img-fluid tick_thanhcong" alt=""></p>
                                             </div>

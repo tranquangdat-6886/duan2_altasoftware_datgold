@@ -17,8 +17,9 @@ return new class extends Migration
             $table->id('ID_ORDER');
             $table->unsignedBigInteger("ID_CU")->nullable();
             $table->unsignedBigInteger("ID_TICKET")->nullable();
-            $table->integer("quantity");
+            $table->integer("quantity")->nullable();
             $table->string("imageqr")->nullable();
+            $table->integer('status')->nullable();
             $table->foreign('ID_CU')->references("ID_CU")->on('customers')->onDelete("SET NULL");
             $table->foreign("ID_TICKET")->references("ID_TICKET")->on("tickets")->onDelete("SET NULL");
             // $table->timestamps();

@@ -47,7 +47,7 @@
                                         </p>
                                     </div>
                                     <div class="card-footer bg-transparent border-0 mt-0">
-                                        <a href="/detail">
+                                        <a href="{{ route('eventdetail', ['ID_EVEN' => $event->ID_EVEN]) }}">
                                             <img src="{{ asset('frontend/assets/images/xemchitiet.png') }}"
                                                 class="img-fluid" alt="">
                                         </a>

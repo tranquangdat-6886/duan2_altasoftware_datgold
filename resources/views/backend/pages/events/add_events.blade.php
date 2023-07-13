@@ -80,12 +80,40 @@
                     </script>
                     <div class="row mb-3">
                         <div class="col-lg-12">
-                            <label for="description" class="form-label label_altasoftware_add mb-0">Mô tả </label>
-                            <textarea type="text" id="editor" name="description" class="form-control button_input ck-editor-textarea"></textarea>
+                            <label for="description" class="form-label label_altasoftware_add mb-0">Mô tả 1</label>
+                            <textarea type="text" id="editor" name="description1" class="form-control button_input ck-editor-textarea"></textarea>
                         </div>
                         <span class="mt-1 mb-0 error">
-                            @if ($errors->has('description'))
-                                @foreach ($errors->get('description') as $message)
+                            @if ($errors->has('description1'))
+                                @foreach ($errors->get('description1') as $message)
+                                    <i class="fa-regular fa-circle-exclamation"></i> {{ $message }}
+                                @endforeach
+                            @endif
+                        </span>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-lg-12">
+                            <label for="description" class="form-label label_altasoftware_add mb-0">Mô tả 2</label>
+                            <textarea type="text" id="editor2" name="description2" class="form-control button_input ck-editor-textarea"></textarea>
+                        </div>
+                        <span class="mt-1 mb-0 error">
+                            @if ($errors->has('description2'))
+                                @foreach ($errors->get('description2') as $message)
+                                    <i class="fa-regular fa-circle-exclamation"></i> {{ $message }}
+                                @endforeach
+                            @endif
+                        </span>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-lg-12">
+                            <label for="description" class="form-label label_altasoftware_add mb-0">Mô tả 3</label>
+                            <textarea type="text" id="editor3" name="description3" class="form-control button_input ck-editor-textarea"></textarea>
+                        </div>
+                        <span class="mt-1 mb-0 error">
+                            @if ($errors->has('description3'))
+                                @foreach ($errors->get('description3') as $message)
                                     <i class="fa-regular fa-circle-exclamation"></i> {{ $message }}
                                 @endforeach
                             @endif
@@ -93,75 +121,30 @@
                     </div>
 
                     <script>
+                        // Define the custom upload adapter plugin
                         class MyUploadAdapter {
                             constructor(loader) {
-                                // The file loader instance to use during the upload.
                                 this.loader = loader;
                             }
 
-                            // Starts the upload process.
                             upload() {
                                 return this.loader.file
                                     .then(file => new Promise((resolve, reject) => {
-                                        this._initRequest();
-                                        this._initListeners(resolve, reject, file);
-                                        this._sendRequest(file);
+                                        const reader = new FileReader();
+
+                                        reader.onload = () => {
+                                            resolve({
+                                                default: reader.result
+                                            });
+                                        };
+
+                                        reader.onerror = reject;
+
+                                        reader.readAsDataURL(file);
                                     }));
                             }
 
-                            // Aborts the upload process.
-                            abort() {
-                                if (this.xhr) {
-                                    this.xhr.abort();
-                                }
-                            }
-
-                            // Initializes the XMLHttpRequest object using the URL passed to the constructor.
-                            _initRequest() {
-                                const xhr = this.xhr = new XMLHttpRequest();
-                                xhr.open('POST', "{{ route('events.store', ['_token' => csrf_token()]) }}", true);
-                                xhr.responseType = 'json';
-                            }
-
-                            // Initializes XMLHttpRequest listeners.
-                            _initListeners(resolve, reject, file) {
-                                const xhr = this.xhr;
-                                const loader = this.loader;
-                                const genericErrorText = `Couldn't upload file: ${ file.name }.`;
-
-                                xhr.addEventListener('error', () => reject(genericErrorText));
-                                xhr.addEventListener('abort', () => reject());
-                                xhr.addEventListener('load', () => {
-                                    const response = xhr.response;
-                                    if (!response || response.error) {
-                                        return console.log(response && response.error ? response.error.message :
-                                            genericErrorText);
-                                    }
-                                    // resolve({
-                                    //     default: response.url
-                                    // });
-                                    resolve(response);
-                                });
-
-                                if (xhr.upload) {
-                                    xhr.upload.addEventListener('progress', evt => {
-                                        if (evt.lengthComputable) {
-                                            loader.uploadTotal = evt.total;
-                                            loader.uploaded = evt.loaded;
-                                        }
-                                    });
-                                }
-                            }
-
-                            _sendRequest(file) {
-                                // Prepare the form data.
-                                const data = new FormData();
-
-                                data.append('upload', file);
-
-
-                                this.xhr.send(data);
-                            }
+                            abort() {}
                         }
 
                         function MyCustomUploadAdapterPlugin(editor) {
@@ -170,13 +153,40 @@
                             };
                         }
 
+                        // Initialize CKEditor with the custom upload adapter plugin
                         ClassicEditor
                             .create(document.querySelector('#editor'), {
                                 extraPlugins: [MyCustomUploadAdapterPlugin],
-                                // ...
+                                toolbar: ['heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote',
+                                    'insertTable', 'imageUpload', 'undo', 'redo'
+                                ]
                             })
                             .catch(error => {
-                                console.log(error);
+                                console.error(error);
+                            });
+
+                        // Initialize the second CKEditor instance
+                        ClassicEditor
+                            .create(document.querySelector('#editor2'), {
+                                extraPlugins: [MyCustomUploadAdapterPlugin],
+                                toolbar: ['heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote',
+                                    'insertTable', 'imageUpload', 'undo', 'redo'
+                                ]
+                            })
+                            .catch(error => {
+                                console.error(error);
+                            });
+
+                        // Initialize the third CKEditor instance
+                        ClassicEditor
+                            .create(document.querySelector('#editor3'), {
+                                extraPlugins: [MyCustomUploadAdapterPlugin],
+                                toolbar: ['heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote',
+                                    'insertTable', 'imageUpload', 'undo', 'redo'
+                                ]
+                            })
+                            .catch(error => {
+                                console.error(error);
                             });
                     </script>
 
@@ -206,12 +216,13 @@
                     </div>
                     <div class="row">
                         <div class="col-lg-12">
-                            <select class="form-select form-select-lg mb-3 button_input" aria-label=".form-select-lg example" name="status">
+                            <select class="form-select form-select-lg mb-3 button_input"
+                                aria-label=".form-select-lg example" name="status">
                                 <option selected>Trạng Thái</option>
                                 <option value="1">Hoạt Động</option>
                                 <option value="0">Ngừng Hoạt Động</option>
-                              
-                              </select>
+
+                            </select>
                         </div>
                         <span class="mt-1 mb-0 error">
                             @if ($errors->has('status'))
