@@ -22,6 +22,9 @@
                             <img src="{{ asset('frontend/assets/images/icon4.png') }}" class="img-fluid tt_hinhnguoi1"
                                 alt="">
                         </div>
+                        <div class="position-absolute translate-middle tieude_goi">
+                            <h1 id="goi_tieude">Vé cổng - </h1>
+                        </div>
                         <div class="position-absolute translate-middle absolute_thanhtoan">
                             <div class="row">
                                 <div class="col-lg-5">

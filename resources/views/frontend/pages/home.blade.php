@@ -76,9 +76,13 @@
                                             <select class="form-select mb-3 chongoi" aria-label=".form-select-lg example"
                                                 id="mySelect" name="package">
                                                 <option selected>Chọn gói</option>
+                                                @if(isset($package))
                                                 @foreach ($package as $package)
                                                     <option value="{{ $package->ID_PACK }}">{{ $package->name }}</option>
                                                 @endforeach
+                                                @else
+                                                <option value="0" disabled> Chưa có dữ liệu</option>
+                                                @endif
                                             </select>
                                             <img src="{{ asset('frontend/assets/images/nutselect.png') }}" alt=""
                                                 class="img-fluid select-image" id="selectButton">

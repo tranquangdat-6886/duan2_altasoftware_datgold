@@ -23,6 +23,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Frontend'], function () {
     Route::post('/orders', 'OrderController@create')->name('order.create');
     Route::post('/checkout', 'OrderController@checkout')->name('order.checkout');
     Route::get('/callback/{ID_CU}/{ID_TICKET}/{quantity}', 'OrderController@callback')->name('callback');
+    Route::post('seend','ContactController@seend')->name('sennd');
 
     // ...
 });
@@ -36,7 +37,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('package', PackageController::class);
     Route::resource('ticket', TicketController::class);
     Route::get('/order', [CustomerController::class, 'index'])->name('order');
-
+    Route::get('/contacts', [ContactController::class, 'index'])->name('contacts');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

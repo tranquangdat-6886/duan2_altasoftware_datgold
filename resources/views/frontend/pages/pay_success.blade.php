@@ -25,23 +25,28 @@
 
                     <div class="col-lg-10 ">
                         <div class="row ">
-                            <div class="col-lg-3 sukien_khung">
-                                <div class="card">
-                                    <div class="card-header p-0 bg-transparent border-0 text-center pt-3">
-                                        {!! $qrCode['qrCodeSvg'] !!}
-                                    </div>
-                                    <div class="card-body">
-                                        <h1 class="mb-3 thanhcong_title">{{ $qrCode['name'] }}</h1>
-                                        <div class="text-center ps-5">
-                                            <p class="thanhcong_title2 mb-0">VÉ CỔNG</p>
-                                            <p class="mt-0 gach ms-5">---</p>
-                                            <p class="thanhcong_date">Ngày sử dụng: {{ $qrCode['ticketDate'] }}</p>
-                                            <p> <img src="{{ asset('frontend/assets/images/tick_thanhcong.png') }}"
-                                                    class="img-fluid tick_thanhcong" alt=""></p>
+                            <?php $count = 0; ?>
+                            @foreach ($qrCodes as $qrCode)
+                                <div class="col-lg-3 sukien_khung">
+                                    <div class="card">
+                                        <div class="card-header p-0 bg-transparent border-0 text-center pt-3">
+                                            {!! $qrCode['qrCodeSvg'] !!}
+                                        </div>
+                                        <div class="card-body">
+                                            <h1 class="mb-3 thanhcong_title">{{ $qrCode['name'] }}</h1>
+                                            <div class="text-center ps-5">
+                                                <p class="thanhcong_title2 mb-0">VÉ CỔNG</p>
+                                                <p class="mt-0 gach ms-5">---</p>
+                                                <p class="thanhcong_date">Ngày sử dụng: {{ $qrCode['ticketDate'] }}</p>
+                                                <p> <img src="{{ asset('frontend/assets/images/tick_thanhcong.png') }}"
+                                                        class="img-fluid tick_thanhcong" alt=""></p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                                <?php $count++; ?>
+                            @endforeach
+
                         </div>
                     </div>
                 </div>
@@ -52,12 +57,12 @@
                 </div>
                 <div class="position-absolute translate-middle  footer_thanhtoantt" style="z-index: 11;">
                     <p class="tttc_quantiti">
-                        Số lượng: 12 vé
+                        Số lượng: <?php echo $count; ?> vé
                     </p>
                 </div>
                 <div class="position-absolute translate-middle  footer_right_thanhtoantt" style="z-index: 11;">
                     <p class="tttc_quantiti">
-                        Trang 1/3
+                        Trang 1/<?php echo $count; ?>
                     </p>
                 </div>
             </div>

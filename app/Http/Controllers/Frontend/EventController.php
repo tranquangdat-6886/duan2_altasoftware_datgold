@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Event;
 use Illuminate\Http\Request;
 
 class EventController extends Controller
@@ -10,7 +11,8 @@ class EventController extends Controller
     //
     public function index()
     {
-        return view('frontend.pages.events');
+        $events = Event::with('ticket')->get();
+        return view('frontend.pages.events')->with('events', $events);
     }
 
     public function detail()

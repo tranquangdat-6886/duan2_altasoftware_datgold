@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string("phoneNumber");
             $table->string("email");
             $table->string("address")->nullable();
-            $table->date("ticketDate");
+            $table->date("ticketDate")->nullable();
             $table->integer("status")->nullable();
             // $table->timestamps();
         });

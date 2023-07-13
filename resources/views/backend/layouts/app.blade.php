@@ -35,7 +35,7 @@
                                 <a href="{{route('order')}}" class="nav-link ">Orders</a>
                             </li>
                             <li class="nav-item font_19 ">
-                                <a href="" class="nav-link ">Contacts</a>
+                                <a href="{{route('contacts')}}" class="nav-link ">Contacts</a>
                             </li>
                             <li class="nav-item font_19 ">
                                 <a href="" class="nav-link ">Settings</a>

@@ -27,102 +27,34 @@
                 </div>
                 <div class="col-lg-10">
                     <div class="row ">
-                        <div class="col-lg-3 sukien_khung">
-                            <div class="card ">
-                                <div class="card-header p-0 bg-transparent">
-                                    <img src="{{ asset('frontend/assets/images/sukien1.png') }}" class="img-fluid"
-                                        alt="">
-                                </div>
-                                <div class="card-body">
-                                    <h1 class="mb-0 sukien">Sự kiện 1</h1>
-                                    <p class="mt-0 sukien_mota">Đầm sen Part</p>
-                                    <p class="sukien_date "><span><img
-                                                src="{{ asset('frontend/assets/images/calendar.png') }}" alt=""
-                                                class="img-fluid"></span>30/05/2023 - 17/07/2023</p>
-                                    <p class="gia mb-0">
-                                        25.000 VND
-                                    </p>
-                                </div>
-                                <div class="card-footer bg-transparent border-0 mt-0">
-                                    <a href="/detail">
-                                        <img src="{{ asset('frontend/assets/images/xemchitiet.png') }}" class="img-fluid"
-                                            alt="">
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 sukien_khung">
-                            <div class="card ">
-                                <div class="card-header p-0 bg-transparent">
-                                    <img src="{{ asset('frontend/assets/images/sukien1.png') }}" class="img-fluid"
-                                        alt="">
-                                </div>
-                                <div class="card-body">
-                                    <h1 class="mb-0 sukien">Sự kiện 1</h1>
-                                    <p class="mt-0 sukien_mota">Đầm sen Part</p>
-                                    <p class="sukien_date "><span><img
-                                                src="{{ asset('frontend/assets/images/calendar.png') }}" alt=""
-                                                class="img-fluid"></span>30/05/2023 - 17/07/2023</p>
-                                    <p class="gia mb-0">
-                                        25.000 VND
-                                    </p>
-                                </div>
-                                <div class="card-footer bg-transparent border-0 mt-0">
-                                    <a href="/detail">
-                                        <img src="{{ asset('frontend/assets/images/xemchitiet.png') }}" class="img-fluid"
-                                            alt="">
-                                    </a>
+                        @foreach ($events as $event)
+                            <div class="col-lg-3 sukien_khung">
+                                <div class="card ">
+                                    <div class="card-header p-0 bg-transparent">
+                                        <img src="{{ asset($event->avatar) }}" class="img-fluid" alt="">
+                                    </div>
+                                    <div class="card-body">
+                                        <h1 class="mb-0 sukien">{{ $event->name }}</h1>
+                                        <p class="mt-0 sukien_mota">{{ $event->title }}</p>
+                                        <p class="sukien_date "><span><img
+                                                    src="{{ asset('frontend/assets/images/calendar.png') }}" alt=""
+                                                    class="img-fluid"></span>{{ date('d/m/Y', strtotime($event->startDate)) }}
+                                            - {{ date('d/m/Y', strtotime($event->endDate)) }}</p>
+                                        <p class="gia mb-0">
+                                            @foreach ($event->ticket as $ticket)
+                                                {{ number_format($ticket->price, 0, ',', '.') }} VND
+                                            @endforeach
+                                        </p>
+                                    </div>
+                                    <div class="card-footer bg-transparent border-0 mt-0">
+                                        <a href="/detail">
+                                            <img src="{{ asset('frontend/assets/images/xemchitiet.png') }}"
+                                                class="img-fluid" alt="">
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-3 sukien_khung">
-                            <div class="card ">
-                                <div class="card-header p-0 bg-transparent">
-                                    <img src="{{ asset('frontend/assets/images/sukien1.png') }}" class="img-fluid"
-                                        alt="">
-                                </div>
-                                <div class="card-body">
-                                    <h1 class="mb-0 sukien">Sự kiện 1</h1>
-                                    <p class="mt-0 sukien_mota">Đầm sen Part</p>
-                                    <p class="sukien_date "><span><img
-                                                src="{{ asset('frontend/assets/images/calendar.png') }}" alt=""
-                                                class="img-fluid"></span>30/05/2023 - 17/07/2023</p>
-                                    <p class="gia mb-0">
-                                        25.000 VND
-                                    </p>
-                                </div>
-                                <div class="card-footer bg-transparent border-0 mt-0">
-                                    <a href="/detail">
-                                        <img src="{{ asset('frontend/assets/images/xemchitiet.png') }}" class="img-fluid"
-                                            alt="">
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 sukien_khung">
-                            <div class="card ">
-                                <div class="card-header p-0 bg-transparent">
-                                    <img src="{{ asset('frontend/assets/images/sukien1.png') }}" class="img-fluid"
-                                        alt="">
-                                </div>
-                                <div class="card-body">
-                                    <h1 class="mb-0 sukien">Sự kiện 1</h1>
-                                    <p class="mt-0 sukien_mota">Đầm sen Part</p>
-                                    <p class="sukien_date "><span><img
-                                                src="{{ asset('frontend/assets/images/calendar.png') }}" alt=""
-                                                class="img-fluid"></span>30/05/2023 - 17/07/2023</p>
-                                    <p class="gia mb-0">
-                                        25.000 VND
-                                    </p>
-                                </div>
-                                <div class="card-footer bg-transparent border-0 mt-0">
-                                    <a href="/detail">
-                                        <img src="{{ asset('frontend/assets/images/xemchitiet.png') }}" class="img-fluid"
-                                            alt="">
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
                 <div class="col-lg-1" style="z-index: 11;">

@@ -6,13 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Customer;
 use App\Models\DetailOrder;
 use App\Models\Order;
+use App\Models\Payment;
 use App\Models\Ticket;
-
-
-use Intervention\Image\ImageManagerStatic as Image;
-
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
-
 
 use Illuminate\Http\Request;
 
@@ -29,22 +25,6 @@ class OrderController extends Controller
     }
     public function create(Request $request)
     {
-        // $request->validate([
-        //     'package'=>'required',
-        //     'quantity' => 'required|integer|max:10',
-        //     'ticketDate'=>'required',
-        //     'name'=>'required|string|max:255',
-        //     'phoneNumber'=>'required|integer',
-        //     'email'=>'required|string|max:255',
-        // ],[
-        //     'package.required'=>'Vui lòng chọn gói vé',
-        //     'quantity.required'=>'Số lượng vé mỗi lần đặt không quá 10',
-        //     'ticketDate.required'=>'Chọn ngày sử dụng',
-        //     'name.required'=>'Vui lòng nhập đầy đủ họ tên',
-        //     'phoneNumber.required'=>'Nhập số điện thoại là dãy số nguyên',
-        //     'email.required'=>'Vui lòng nhập email',
-        // ]);
-
         $customer = new Customer();
         $customer->name = $request->input('name');
         $customer->phoneNumber = $request->input('phoneNumber');
@@ -95,21 +75,13 @@ class OrderController extends Controller
         $price = $request->input('price');
         $quantity = $request->input('quantity');
         $vnp_Returnurl = route('callback', ['ID_CU' => $customer, 'ID_TICKET' => $ticket, 'quantity' => $quantity]);
-
-        // Lấy thông tin từ form
-
-
-        // $cardDate = $request->input('cardDate');
-
-        // Các thông tin đơn hàng
-        //$vnp_TxnRef = '6886'; // Mã đơn hàng
-        $vnp_TxnRef = uniqid(); // Mã đơn hàng ngẫu nhiên
-        $vnp_OrderInfo = "Thanh toán đơn hàng datgold"; // Thông tin đơn hàng (nội dung chuyển tiền)
-        $vnp_OrderType = "Vé little & LITTLE"; // Loại đơn hàng
-        $vnp_Amount = $price * 100000; // Số tiền thanh toán
-        $vnp_Locale = "vn"; // Ngôn ngữ
-        $vnp_BankCode = "NCB"; // Mã ngân hàng VNBANK
-        $vnp_IpAddr = $request->ip(); // Địa chỉ IP của người dùng
+        $vnp_TxnRef = uniqid();
+        $vnp_OrderInfo = "Thanh toán Vé Đầm Sen Datgold"; 
+        $vnp_OrderType = "Vé little & LITTLE"; 
+        $vnp_Amount = $price * 100000; 
+        $vnp_Locale = "vn";
+        $vnp_BankCode = "NCB"; 
+        $vnp_IpAddr = $request->ip(); 
 
         $inputData = array(
             "vnp_Version" => "2.1.0",
@@ -155,16 +127,12 @@ class OrderController extends Controller
             'message' => 'success',
             'data' => $vnp_Url
         );
-
-        // Chuyển hướng đến trang thanh toán VNPay
         return redirect()->to($vnp_Url);
     }
-
-    // app/Http/Controllers/PaymentController.php
     public function callback(Request $request, $ID_CU, $ID_TICKET, $quantity)
     {
-        // Lưu dữ liệu trả về vào cơ sở dữ liệu
         $responseData = $request->all();
+        Payment::create($responseData);   
         $customer = Customer::find($ID_CU);
         $customer->status = 1;
         $customer->save();
@@ -180,24 +148,26 @@ class OrderController extends Controller
         $soluong = $order->sum('quantity');
         $price = $ticket->price;
 
-        // Tạo mã QR từ thông tin
-        $qrCodeData = [
-            'name' => $name,
-            'soluong' => $soluong,
-            'price' => $price,
-            'ticketDate' => $ticketDate,
-        ];
+        $qrCodes = [];
+        for ($i = 0; $i < $quantity; $i++) {
+            $qrCodeData = [
+                'name' => $name,
+                'soluong' => $soluong,
+                'price' => $price,
+                'ticketDate' => $ticketDate,
+            ];
 
-        $qrCodeSvg = QrCode::format('svg')->generate(json_encode($qrCodeData));
-        $qrCode = [
-            'name' => $name,
-            'soluong' => $soluong,
-            'ticketDate' => $ticketDate,
-            'price' => $price,
-            'qrCodeSvg' => $qrCodeSvg,
-        ];
+            $qrCodeSvg = QrCode::format('svg')->generate(json_encode($qrCodeData));
 
-        // Redirect đến trang 'paysuccess' với thông tin mã QR
-        return view('frontend.pages.pay_success', compact('qrCode'));
+            $qrCodes[] = [
+                'name' => $name,
+                'soluong' => $soluong,
+                'ticketDate' => $ticketDate,
+                'price' => $price,
+                'qrCodeSvg' => $qrCodeSvg,
+            ];
+        }
+
+        return view('frontend.pages.pay_success', compact('qrCodes'));
     }
 }

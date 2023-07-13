@@ -37,4 +37,5 @@ document.addEventListener("DOMContentLoaded", function(event) {
     dropBall(); // Bắt đầu quá trình rơi
 
     // Khi muốn dừng quá trình rơi, bạn có thể gọi clearInterval(interval);
+
 });
