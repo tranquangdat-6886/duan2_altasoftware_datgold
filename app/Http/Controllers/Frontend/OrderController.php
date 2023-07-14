@@ -8,6 +8,7 @@ use App\Models\DetailOrder;
 use App\Models\Order;
 use App\Models\Package;
 use App\Models\Payment;
+use App\Models\Setting;
 use App\Models\Ticket;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
@@ -49,7 +50,7 @@ class OrderController extends Controller
         $detailOrder->ID_ORDER = $order->ID_ORDER;
         $detailOrder->price = $tongtien;
         $detailOrder->save();
-
+        $settings = Setting::find(1);
         return view('frontend.pages.pay')->with([
             'customer' => [
                 'name' => $customer->name,
@@ -67,7 +68,7 @@ class OrderController extends Controller
                 'price' => $detailOrder->price,
             ],
 
-        ])->with('tengoi', $tengoi);
+        ])->with('tengoi', $tengoi)->with('settings', $settings);
     }
     public function checkout(Request $request)
     {
@@ -173,7 +174,7 @@ class OrderController extends Controller
                 'qrCodeSvg' => $qrCodeSvg,
             ];
         }
-
-        return view('frontend.pages.pay_success', compact('qrCodes'))->with('mave', $mave);
+        $settings = Setting::find(1);
+        return view('frontend.pages.pay_success', compact('qrCodes'))->with('mave', $mave)->with('settings', $settings);
     }
 }

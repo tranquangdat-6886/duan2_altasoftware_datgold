@@ -5,13 +5,15 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Contact;
 use App\Models\Customer;
+use App\Models\Setting;
 use Illuminate\Http\Request;
 
 class ContactController extends Controller
 {
     public function index()
     {
-        return view('frontend.pages.contact');
+        $settings = Setting::find(1);
+        return view('frontend.pages.contact')->with('settings', $settings);
     }
     //
     public function seend(Request $request)
@@ -28,7 +30,7 @@ class ContactController extends Controller
         $contact->ID_CU = $customer->ID_CU;
         $contact->content = $request->input('content');
         $contact->save();
-
-        return view('frontend.pages.contact')->with('thongbao', 'gui thanh cong');
+        $settings = Setting::find(1);
+        return view('frontend.pages.contact')->with('thongbao', 'gui thanh cong')->with('settings',$settings);
     }
 }

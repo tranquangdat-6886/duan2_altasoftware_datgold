@@ -5,11 +5,12 @@
                 class="img-fluid nenmenu">
             <div class="position-absolute  row align-items-center">
                 <div class="col-lg-3 text-end pb-3 ">
-                    <a href="/">
-                        <img src="{{ asset('frontend/assets/images/logo_header.png') }}" alt=""
-                        class="img-fluid logo_header ">
+                    <a href="{{ route('home') }}">
+                        @if (isset($settings))
+                            <img src="{{ asset($settings->logo1) }}" class="img-fluid" alt="">
+                        @endif
                     </a>
-                 
+
                 </div>
                 <div class="col-lg-6 text-center menu ps-5 pe-0">
                     <ul class="nav text-center">
@@ -86,7 +87,9 @@
                 <div class=" col-lg-3 text-start  ">
                     <span class="sdt">
                         <img src="{{ asset('frontend/assets/images/sdt.png') }}" alt="" class="img-fluid">
-                        0823488817
+                        @if (isset($settings))
+                            {{ $settings->phoneNumber }}
+                        @endif
                     </span>
                 </div>
             </div>

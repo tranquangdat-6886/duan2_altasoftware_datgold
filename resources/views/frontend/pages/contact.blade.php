@@ -96,7 +96,9 @@
                                     Địa chỉ
                                 </p>
                                 <p class="mt-0 lienhe_diachi1">
-                                    86/33 Âu Cơ, Phường 9, Quận Tân Bình, TP. Hồ Chí Minh
+                                   @if(isset($settings))
+                                        {{$settings->address}}
+                                   @endif
                                 </p>
                             </div>
                         </div>
@@ -110,7 +112,9 @@
                                     Email
                                 </p>
                                 <p class="mt-0 lienhe_diachi1 ms-3">
-                                    investigate@your-site.com
+                                    @if(isset($settings))
+                                        {{$settings->email}}
+                                   @endif
                                 </p>
                             </div>
                         </div>
@@ -124,7 +128,9 @@
                                     Điện thoại
                                 </p>
                                 <p class="mt-0 lienhe_diachi1 ms-3">
-                                    +84 145 689 798
+                                    @if(isset($settings))
+                                    {{$settings->phoneNumber}}
+                               @endif
                                 </p>
                             </div>
                         </div>

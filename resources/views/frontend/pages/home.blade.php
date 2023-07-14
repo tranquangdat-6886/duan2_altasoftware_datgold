@@ -10,7 +10,9 @@
                 <div class="col-lg-6" style="z-index: 9;">
                     <div class="row align-items-center">
                         <div class="col-lg-4 text-end pt-4 ">
-                            <img src="{{ asset('frontend/assets/images/logo_damsen.png') }}" class="img-fluid" alt="">
+                            @if(isset($settings))
+                            <img src="{{ asset($settings->logo2) }}" class="img-fluid" alt="">
+                            @endif
                         </div>
                         <div class="col-lg-8 pt-4 ">
                             {{-- <span id="title_logo">ĐẦM SEN PARK</span> --}}

@@ -38,7 +38,7 @@
                                 <a href="{{ route('contacts') }}" class="nav-link ">Contacts</a>
                             </li>
                             <li class="nav-item font_19 ">
-                                <a href="" class="nav-link ">Settings</a>
+                                <a href="{{route('setting.index',['ID_SET'=>1])}}" class="nav-link ">Settings</a>
                             </li>
                         </ul>
                         {{-- <x-responsive-nav-link :href=""
